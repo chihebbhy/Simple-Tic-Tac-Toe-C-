@@ -6,6 +6,7 @@ class Game
 {
 public:
 
+    int score[3] = {0,0,0};
     char Board[3][3];           // T holder , X for x , O for o
     bool GameOver = false;
     int TurnsPlayed = 0;
@@ -82,12 +83,22 @@ public:
         if(ok)
         {
             GameOver = true;
-            Winner = (Turn == 1) ? "O" : "X";
+            if(Turn == 1)
+            {
+                Winner = "O";
+                score[1]++;
+            }
+            else
+            {
+                Winner = "X";
+                score[0]++;
+            }
         }
         else if(TurnsPlayed >=9)
         {
             GameOver = true;
             Winner = "Draw";
+            score[2]++;
         }
         else
         {
@@ -104,8 +115,10 @@ public:
             PlayTurn();
             system("cls");
         }
-        cout << "GAME OVER CONGRATS " << Winner ;
-        if(Winner != "Draw"){
+        cout << "GAME OVER CONGRATS " << Winner << endl;
+        cout << "SCORE " << score[0] << " | " << score[2] << " | " << score[1];
+        if(Winner != "Draw")
+        {
             cout << " won fair and square ";
         }
         cout << endl;
